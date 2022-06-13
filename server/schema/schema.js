@@ -1,17 +1,34 @@
-const { projects, clients } = require("../dummyData");
+const { clients, projects } = require("../dummyData");
 
-const { GraphQLString, GraphQLID, GraphQLObjectType } = require("graphql");
+const {
+  GraphQLID,
+  GraphQLString,
+  GraphQLObjectType,
+  GraphQLSchema,
+} = require("graphql");
 
-// client types
-
+//client object types
 const ClientType = new GraphQLObjectType({
-  name: "Client",
+  name: "Clien",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    email: { type: GraphQLString },
     phone: { type: GraphQLString },
   }),
 });
 
-const RootQuery = new GraphQL();
+const RootQuery = new GraphQLObjectType({
+  name: "RootQuery",
+  fields: {
+    client: {
+      type: ClientType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return clients.find((client) => client.id === args.id);
+      },
+    },
+  },
+});
+module.exports = new GraphQLSchema({
+  query: RootQuery,
+});
