@@ -7,6 +7,7 @@ const {
   GraphQLID,
   GraphQLString,
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLSchema,
   GraphQLList,
 } = require("graphql");
@@ -36,6 +37,29 @@ const ClientType = new GraphQLObjectType({
     name: { type: GraphQLString },
     phone: { type: GraphQLString },
   }),
+});
+
+// mutating every point
+const RootMutation = new GraphQLObjectType({
+  name: "RootMutation",
+  fields: {
+    addClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        phone: { type: GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        const client = new Client({
+          name: args.name,
+          email: args.email,
+          phone: args.phone,
+        });
+        return cient.save();
+      },
+    },
+  },
 });
 
 // query every point
