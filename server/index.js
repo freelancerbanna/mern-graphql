@@ -24,7 +24,8 @@ app.use(
 mongoose.connect(DB, {}).then(() => {
   app.listen(PORT, () => {
     console.log(
-      `Server Working with PORT listening on ${PORT}`.rainbow.underline.bold
+      `Server and Database Working with PORT listening on ${PORT}`.rainbow
+        .underline.bold
     );
   });
 });
