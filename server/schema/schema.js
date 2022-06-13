@@ -35,6 +35,7 @@ const ClientType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
+    email: { type: GraphQLString },
     phone: { type: GraphQLString },
   }),
 });
@@ -46,7 +47,7 @@ const RootMutation = new GraphQLObjectType({
     addClient: {
       type: ClientType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
         phone: { type: GraphQLNonNull(GraphQLString) },
       },
@@ -56,7 +57,7 @@ const RootMutation = new GraphQLObjectType({
           email: args.email,
           phone: args.phone,
         });
-        return cient.save();
+        return client.save();
       },
     },
   },
@@ -96,4 +97,5 @@ const RootQuery = new GraphQLObjectType({
 });
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: RootMutation,
 });
