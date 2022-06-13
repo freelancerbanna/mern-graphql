@@ -1,3 +1,3 @@
-const { PORT, NODE_ENV } = process.env;
+const { DB, PORT, NODE_ENV } = process.env;
 
-module.exports = { PORT, NODE_ENV };
+module.exports = { DB, PORT, NODE_ENV };
