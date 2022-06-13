@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ProjectShema = new mongoose.Schema(
+const ProjectSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -10,6 +10,11 @@ const ProjectShema = new mongoose.Schema(
     },
     description: {
       type: String,
+      enum: ["Not started", "In progress", "Finished"],
+    },
+    clientId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
     },
   },
   {
