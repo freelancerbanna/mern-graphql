@@ -1,7 +1,29 @@
-// const { clients, projects } = require("../dummyData");
-// // requiring models
-// const Project = require("../models/Project");
-// const Client = require("../models/Client");
+const Client = require("../models/Client");
+const Project = require("../models/Project");
+
+const { GraphQLObjectType, GraphQLID, GraphQLString } = require("graphql");
+
+// defining client type
+const ClientType = new GraphQLObjectType({
+  name: "ClientType",
+  fields: () => ({
+    id: { type: GrpahQLID },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    phone: { type: GraphQLString },
+  }),
+});
+// defining project type
+
+const ProjectType = new GraphQLObjectType({
+  name: "ProjectType",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    status: { tyep: GraphQLString },
+    description: { type: GraphQLString },
+  }),
+});
 
 // const {
 //   GraphQLID,
