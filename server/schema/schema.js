@@ -28,6 +28,12 @@ const ProjectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     status: { tyep: GraphQLString },
     description: { type: GraphQLString },
+    client: {
+      type: ClientType,
+      resolve(parent, args) {
+        return Client.findById(parent.client.id);
+      },
+    },
   }),
 });
 
@@ -35,6 +41,7 @@ const ProjectType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
   fields: () => ({
+    // client query
     client: {
       type: ClientType,
       args: { id: { type: GraphQLID } },
@@ -46,6 +53,14 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(ClientType),
       resolve(parent, args) {
         return Client.find();
+      },
+    },
+    // project query
+    project: {
+      type: ProjectType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Project.find(args.id);
       },
     },
   }),
