@@ -63,6 +63,12 @@ const RootQuery = new GraphQLObjectType({
         return Project.find(args.id);
       },
     },
+    projects: {
+      type: new GraphQLList(ProjectType),
+      resolve(paren, args) {
+        return Project.find();
+      },
+    },
   }),
 });
 
