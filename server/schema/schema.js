@@ -87,7 +87,7 @@ const RootMutation = new GraphQLObjectType({
         const client = new Client({
           name: args.name,
           email: args.email,
-          phone: args.phnone,
+          phone: args.phone,
         });
         return client.save();
       },
