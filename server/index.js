@@ -14,7 +14,7 @@ const { PORT, NODE_ENV, DB } = require("./env");
 app.use(cors());
 
 app.use(
-  "/graphql",
+  "/api",
   graphqlHTTP({
     schema,
     graphiql: NODE_ENV === "development",
