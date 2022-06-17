@@ -93,6 +93,23 @@ const RootMutation = new GraphQLObjectType({
         return client.save();
       },
     },
+    updateClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phone: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const client = Client.findByIdAndUpdate(args.id, {
+          name: args.name,
+          email: args.email,
+          phone: args.phone,
+        });
+        return client;
+      },
+    },
     deleteClient: {
       type: ClientType,
       args: {
