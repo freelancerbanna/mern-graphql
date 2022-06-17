@@ -4,11 +4,9 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 
 const Clients = ({ clients }: any) => {
-  console.log(clients);
-
   return (
-    <section className="bg-white py-20 lg:py-[120px]">
-      <div className="container">
+    <section className="bg-white">
+      <div className="container mx-auto">
         <div className="flex flex-wrap -mx-4">
           <div className="w-full px-4">
             <div className="max-w-full overflow-x-auto">
