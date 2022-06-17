@@ -135,7 +135,7 @@ const RootMutation = new GraphQLObjectType({
               completed: { value: "Completed" },
             },
           }),
-          defaultValue: "Not Stated",
+          defaultValue: "Not started",
         },
         clientId: { type: GraphQLNonNull(GraphQLID) },
       },
@@ -144,6 +144,7 @@ const RootMutation = new GraphQLObjectType({
           name: args.name,
           description: args.description,
           status: args.status,
+          clientId: args.clientId,
         });
         return client.save();
       },
