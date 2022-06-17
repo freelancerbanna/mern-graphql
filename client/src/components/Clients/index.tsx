@@ -92,7 +92,7 @@ const Clients = ({ clients }: any) => {
                   </tr>
                 </thead>
                 {clients.map((client: any, id: number) => (
-                  <tbody>
+                  <tbody key={id}>
                     <tr>
                       <td
                         className="
