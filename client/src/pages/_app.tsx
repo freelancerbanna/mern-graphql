@@ -1,12 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 
-export const client = new ApolloClient({
-  uri: process.env.SERVER,
-  cache: new InMemoryCache(),
-});
+import client from "apollo-client";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
