@@ -76,6 +76,7 @@ const RootQuery = new GraphQLObjectType({
 const RootMutation = new GraphQLObjectType({
   name: "RootMutation",
   fields: () => ({
+    // client mutation methods
     addClient: {
       type: ClientType,
       args: {
@@ -90,6 +91,22 @@ const RootMutation = new GraphQLObjectType({
           phone: args.phone,
         });
         return client.save();
+      },
+    },
+    deleteClient: {
+      type: ClientType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Client.findByIdAndRemove(args.id);
+      },
+    },
+    // product mutation methods
+    addProduct: {
+      type: ProjectType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
       },
     },
   }),
