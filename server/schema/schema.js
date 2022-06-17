@@ -8,6 +8,7 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLNonNull,
+  GraphQLEnumType,
 } = require("graphql");
 
 // defining client type
@@ -123,7 +124,28 @@ const RootMutation = new GraphQLObjectType({
     addProduct: {
       type: ProjectType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        status: {
+          type: new GraphQLEnumType({
+            name: "ProjectStatus",
+            values: {
+              new: { value: "Not statred" },
+              progress: { value: "In progress" },
+              completed: { value: "Completed" },
+            },
+          }),
+          defaultValue: "Not Stated",
+        },
+        clientId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve: async (parent, args) => {
+        const client = await new Project({
+          name: args.name,
+          description: args.description,
+          status: args.status,
+        });
+        return client.save();
       },
     },
   }),
