@@ -101,8 +101,8 @@ const RootMutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         phone: { type: GraphQLString },
       },
-      resolve(parent, args) {
-        const client = Client.findByIdAndUpdate(args.id, {
+      resolve: async (parent, args) => {
+        const client = await Client.findByIdAndUpdate(args.id, {
           name: args.name,
           email: args.email,
           phone: args.phone,
